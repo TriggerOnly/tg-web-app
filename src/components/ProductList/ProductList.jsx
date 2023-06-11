@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './ProductList.css'
-import ProductItem from '../ProductItem/productItem'
+import ProductItem from '../ProductItem/ProductItem'
 import { useTelegram } from '../../hooks/useTelegram'
+import { useCallback, useEffect } from 'react'
 
 const products = [
   {id: '1', title: 'Джинсы', price: 5000, description: 'Синего цвета, прямые'},
@@ -24,12 +25,12 @@ const ProductList = () => {
   const [addedItems, setAddedItems] = useState([])
   const {tg} = useTelegram()
 
-  const onAddHandler = (product) => {
+  const onAdd = (product) => {
     const alreadyAdded = addedItems.find(item => item.id === product.id)
     let newItems = []
 
     if (alreadyAdded) {
-      newItems = addedItems.filter(item => item.id === product.id)
+      newItems = addedItems.filter(item => item.id !== product.id)
     } else {
       newItems = [...addedItems, product]
     }
