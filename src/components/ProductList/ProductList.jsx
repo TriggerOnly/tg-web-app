@@ -27,7 +27,7 @@ const ProductList = () => {
 
   const onSendData = useCallback(() => {
     const data = {
-      products:   addedItems,
+      products: addedItems,
       totalPrice: getTotalPrice(addedItems), 
       queryId
     }
@@ -38,7 +38,7 @@ const ProductList = () => {
       },
       body: JSON.stringify(data)
     })
-  }, [])
+  }, [addedItems])
 
   useEffect(() => {
       tg.onEvent('mainButtonClicked', onSendData)
@@ -71,13 +71,13 @@ const ProductList = () => {
 
   return (
     <div className={'list'}>
-        {products.map(item => {
+        {products.map(item => (
           <ProductItem
             product={item}
             onAdd={onAdd}
             className={'item'}
           />
-        })}
+        ))}
     </div>
   )
 }
